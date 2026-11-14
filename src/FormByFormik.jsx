@@ -30,19 +30,19 @@ export const FormByFormik = () => {
         <div className="form-control">
           <label htmlFor="name">Name</label>
           <Field type="text" id="name" name="name" />
-          <ErrorMessage name="name" />
+          <ErrorMessage component="class" className="error" name="name" />
         </div>
 
         <div className="form-control">
           <label htmlFor="email">E-mail</label>
           <Field type="email" id="email" name="email" />
-          <ErrorMessage className="error" name="email" />
+          <ErrorMessage component="class" className="error" name="email" />
         </div>
 
         <div className="form-control">
           <label htmlFor="channel">Channel</label>
           <Field type="text" id="channel" name="channel" />
-          <ErrorMessage name="channel" />
+          <ErrorMessage component="class" className="error" name="channel" />
         </div>
 
         <button type="submit">Submit</button>
