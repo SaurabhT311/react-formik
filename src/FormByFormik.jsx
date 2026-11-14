@@ -37,14 +37,20 @@ const validate = (values) => {
   return errors;
 };
 
+const validationSchema = Yup.object({
+  name: Yup.string().required("Required"),
+  email: Yup.string().email("Invalid email format").required("Required"),
+  channel: Yup.string().required("Required"),
+});
+
 
 export const FormByFormik = () => {
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validate,
+    // validate,
+    validationSchema
   });
-console.log("visited", formik.touched)
 
   return (
     <form className="form" onSubmit={formik.handleSubmit}>
