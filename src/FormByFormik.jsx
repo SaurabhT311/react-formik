@@ -12,44 +12,17 @@ const onSubmit = (values) => {
   console.log("form data", values);
 };
 
-const validate = (values) => {
-  //values.name, values.email, values.channel
-  //errors.name, errors.email, erros.channel
-  //errors.name -> 'this is required'
-  let errors = {};
-
-  if (!values.name) {
-    errors.name = "Required";
-  }
-
-  if (!values.email) {
-    errors.email = "Required";
-  } else if (
-    !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-  ) {
-    errors.email = "Invalid email format";
-  }
-
-  if (!values.channel) {
-    errors.channel = "Required";
-  }
-
-  return errors;
-};
-
 const validationSchema = Yup.object({
   name: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email format").required("Required"),
   channel: Yup.string().required("Required"),
 });
 
-
 export const FormByFormik = () => {
   const formik = useFormik({
     initialValues,
     onSubmit,
-    // validate,
-    validationSchema
+    validationSchema,
   });
 
   return (
@@ -60,9 +33,7 @@ export const FormByFormik = () => {
           type="text"
           id="name"
           name="name"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.name}
+          {...formik.getFieldProps("name")}
         />
         {formik.touched.name && formik.errors.name ? (
           <div className="error">{formik.errors.name}</div>
@@ -75,9 +46,7 @@ export const FormByFormik = () => {
           type="email"
           id="email"
           name="email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
+          {...formik.getFieldProps("email")}
         />
         {formik.touched.email && formik.errors.email ? (
           <div className="error">{formik.errors.email}</div>
@@ -89,9 +58,7 @@ export const FormByFormik = () => {
           type="text"
           id="channel"
           name="channel"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.channel}
+          {...formik.getFieldProps("channel")}
         />
         {formik.touched.channel && formik.errors.channel ? (
           <div className="error">{formik.errors.channel}</div>
